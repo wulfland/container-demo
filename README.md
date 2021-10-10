@@ -2,14 +2,14 @@
 
 1. Create a new repsitory `container-demo` and add a new file namend Dockerfile (without extension). Add the following content:
 
-    ```
+    ```dockerfile
     FROM alpine
     CMD ["echo", "Hello World!"]
     ```
     
     If you want to test this locally, clone your repository and change directory to it. Build and run the image. The output is `Hello World!`:
     
-    ```
+    ```bash
     $ docker build -t container-demo .
     $ docker run --rm container-demo
     > Hello World!
