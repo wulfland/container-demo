@@ -16,7 +16,7 @@
     ```
 2. Create a workflow file `.github/workflows/release-container.yml` with the following content and commit/push it to your repository:
 
-    ```
+    ```YAML
     name: Publish Docker image
 
     on:
