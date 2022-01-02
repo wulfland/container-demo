@@ -39,3 +39,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Anchore SBOM Action
+        uses: anchore/sbom-action@v0.6.0
+        with:
+          path: .
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          registry-username: ${{ github.actor }}
+          registry-password: ${{ secrets.GITHUB_TOKEN }}
+
