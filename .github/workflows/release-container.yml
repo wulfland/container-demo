@@ -48,6 +48,12 @@ jobs:
           registry-username: ${{ github.actor }}
           registry-password: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: Anchore Container Scan
+        uses: anchore/scan-action@v3.2.0
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          debug: true
+          
       - name: Set up and scan with Clair
         shell: bash
         run: |
