@@ -47,4 +47,16 @@ jobs:
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           registry-username: ${{ github.actor }}
           registry-password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Set up and scan with Clair
+        shell: bash
+        run: |
+          curl -L \
+            https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 \
+            -o clair-scanner && \
+            chmod +x ./clair-scanner
+          docker run -d --name clair-db arminc/clair-db:latest
+          docker run -p 6060:6060 --link clair-db:postgres -d --name clair arminc/clair-local-scan:latest
+          ip=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+          ./clair-scanner --ip $ip ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
