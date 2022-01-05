@@ -1,2 +1,2 @@
-FROM ghcr.io/wulfland/acceleratedevops:latest
+FROM alpine:3.14.2
 CMD ["echo", "Hello World!"]
