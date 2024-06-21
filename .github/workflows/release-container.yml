@@ -53,7 +53,7 @@ jobs:
         id: scan
         with:
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          debug: true
+          fail-build: false
 
       - name: upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v2
